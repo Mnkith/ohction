@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def signup
+    # render '/app/assets/colorlib-regform-7/index.html'
   end
 
   # GET /sessions/1 or /sessions/1.json
