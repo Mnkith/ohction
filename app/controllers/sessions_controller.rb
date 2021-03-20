@@ -11,6 +11,9 @@ class SessionsController < ApplicationController
     
   end
 
+  # def fonts
+  #   redirect_to "/app/assets/fonts/poppins"
+  # end
   # GET /sessions/1 or /sessions/1.json
   def show
   end
