@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :sessions
+  root "items#index" 
+  resources :sessions, :users, :items
   get "/signup", to: "users#new"
 
   # get "/fonts/poppins/:font", to: "sessions#fonts"
