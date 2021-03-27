@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
-  before_action :set_session, only: %i[show edit update destroy]
+  # before_action :set_session, only: %i[show edit update destroy]
 
   # GET /sessions or /sessions.json
   def index
