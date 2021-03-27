@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password
+  has_secure_password #validations: false #suppress default validations
 
   before_save { self.email = email.downcase }
   validates :name, presence: true

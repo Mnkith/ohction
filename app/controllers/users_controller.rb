@@ -1,13 +1,16 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
-
+  before_action :current_user, only: %i[show edit update destroy]
+  before_action :logged_in_user, only: [:show]
   # GET /users or /users.json
   def index
     @users = User.all
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    # binding.pry
+    # @user = current_user
+  end
 
   # GET /users/new
   def new
@@ -51,9 +54,11 @@ class UsersController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
-  def set_user
-    @user = User.find(params[:id])
-  end
+  # This disabled because it relies on URL dynamic segment to extract id for 
+  # any user including none-existent or not logged in user, use #current_user instead
+  # def set_user
+  #   @user = User.find(params[:id])
+  # end
 
   # Only allow a list of trusted parameters through.
   def user_params
