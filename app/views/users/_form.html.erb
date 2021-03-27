@@ -3,8 +3,18 @@
     <div class="signup-content">
       <div class="signup-form">
         <h2 class="form-title">Sign up</h2>
+        <% if user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% user.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
         <%= form_with model: user, class: "register-form", id: "register-form" do |form| %>
-        <%# <form method="POST" class="register-form" id="register-form"> %>
+          <%# <form method="POST" class="register-form" id="register-form"> %>
           <div class="form-group">
             <%= form.label :name, '.', class: "zmdi zmdi-account material-icons-name"%>
             <%= form.text_field :name, id: "name", placeholder: "Your Name"%>
@@ -37,4 +47,3 @@
     </div>
   </div>
 </section>
-
