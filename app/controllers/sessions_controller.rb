@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
   def signup
     @user = User.new
+    redirect_to new_user_path
   end
 
   # def fonts

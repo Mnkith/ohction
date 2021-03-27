@@ -1,27 +1,40 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+<section class="signup">
+  <div class="container">
+    <div class="signup-content">
+      <div class="signup-form">
+        <h2 class="form-title">Sign up</h2>
+        <%= form_with model: user, class: "register-form", id: "register-form" do |form| %>
+        <%# <form method="POST" class="register-form" id="register-form"> %>
+          <div class="form-group">
+            <%= form.label :name, '.', class: "zmdi zmdi-account material-icons-name"%>
+            <%= form.text_field :name, id: "name", placeholder: "Your Name"%>
+          </div>
+          <div class="form-group">
+            <%= form.label :email, '.', class: "zmdi zmdi-email"%>
+            <%= form.text_field :email, id: "email", placeholder: "Your Email"%>
+          </div>
+          <div class="form-group">
+            <%= form.label :password, '.', class: "zmdi zmdi-lock" %>
+            <%= form.text_field :password, id: "password", placeholder: "Password" %>
+          </div>
+          <div class="form-group">
+            <%= form.label :password_cofirmation, '.', class: "zmdi zmdi-lock-outline"%>
+            <%= form.text_field :password_cofirmation, name: "password_cofirmation", id: "re_pass", placeholder: "Repeat your password"%>
+          </div>
+          <%# <div class="form-group">
+            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term">
+            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+          </div> %>
+          <div class="form-group form-button">
+            <%= form.submit id: "signup", class: "form-submit", value: "Register" %>
+          </div>
         <% end %>
-      </ul>
+      </div>
+      <div class="signup-image">
+        <figure><%= image_tag "signup-image.jpg", alt: "sing up image" %></figure>
+        <a href="#" class="signup-image-link">I am already member</a>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
+</section>
 
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
