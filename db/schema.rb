@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2021_03_31_040508) do
   create_table "item_details", force: :cascade do |t|
     t.integer "item_id"
     t.integer "image_id"
+    t.integer "bulleting_id"
+    t.index ["bulleting_id"], name: "index_item_details_on_bulleting_id"
     t.index ["image_id"], name: "index_item_details_on_image_id"
     t.index ["item_id"], name: "index_item_details_on_item_id"
   end

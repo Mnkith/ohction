@@ -5,7 +5,9 @@ class Item < ApplicationRecord
                                                                                    # hence optional: true
   has_many :item_details
   has_many :images, through: :item_details
-  # has_many :bulletings, through: :item_datails
+  has_many :bulletings, through: :item_details
+
+  accepts_nested_attributes_for :images, :bulletings
 
   # validates :title, presence: true
   # validates :starting_price, presence: true, numericality: { only_integer: true }
