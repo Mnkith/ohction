@@ -24,7 +24,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    # binding.pry
     if @user.save
+      log_in(@user)
+      @user = current_user
       redirect_to @user, notice: 'User was successfully created.'
     else
       render :new#, status: :unprocessable_entity 

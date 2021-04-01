@@ -9,7 +9,7 @@
               <div class="carousel-inner">
                 <% item.images.each do |image| %>
                   <div class="carousel-item <%= "active" if image == item.images.first %> ">
-                    <%= image_tag image.path, class:"d-block w-30 img-fluid"%>
+                    <%= image_tag image.path, class:"d-block w-30 img-fluid", style: "height: 300px"%>
                   </div>
                 <% end %>
               </div>
