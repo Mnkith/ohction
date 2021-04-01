@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
   # get 'account', to: 'users#show'
+  resources :users do
+    resources :items, only: [:index, :new, :create]
+  end
+  resources :items, only: [:show, :edit, :update, :destroy]
   resources :users, :items
 
   # get "/fonts/poppins/:font", to: "sessions#fonts"

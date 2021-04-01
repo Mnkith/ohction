@@ -5,5 +5,20 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    3.times do 
+      @item.images << Image.new
+      @item.bulletings << Bulleting.new
+    end
   end
+
+  def show
+  end
+
+  def update
+  end
+
+  def create 
+  end
+
+  
 end
