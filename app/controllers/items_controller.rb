@@ -19,6 +19,14 @@ class ItemsController < ApplicationController
   end
 
   def create 
+    item_params
+    binding.pry
+  end
+
+  private
+   
+  def item_params
+    params.require(:item).permit(:title, :start_time, :end_time)
   end
 
   
