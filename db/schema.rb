@@ -33,10 +33,10 @@ ActiveRecord::Schema.define(version: 2021_03_31_040508) do
 
   create_table "items", force: :cascade do |t|
     t.string "title"
-    t.integer "starting_price"
+    t.integer "starting_price", default: 0
     t.time "duration"
     t.string "condition"
-    t.integer "shipping"
+    t.integer "shipping", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "buyer_id"
