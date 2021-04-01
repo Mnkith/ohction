@@ -13,10 +13,10 @@ User.destroy_all
 s1 = User.create name: 'seller_1', email: 's1@ohction,com', password_digest: '123'
 s2 = User.create name: 'seller_2', email: 's2@ohction,com', password_digest: '123'
 
-im1= Image.create image_path: 'item1_1.jpg'
-im2= Image.create image_path: 'item1_2.jpg'
-im3= Image.create image_path: 'item1_3.jpg'
-im4= Image.create image_path: 'item1_4.jpg'
+im1= Image.create path: 'item1_1.jpg'
+im2= Image.create path: 'item1_2.jpg'
+im3= Image.create path: 'item1_3.jpg'
+im4= Image.create path: 'item1_4.jpg'
 
 i1 = Item.create title: 'item_1_titl', seller_id: s1.id
 i2 = Item.create title: 'item_2_titl', seller_id: s1.id
