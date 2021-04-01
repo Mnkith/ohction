@@ -6,5 +6,10 @@ class Item < ApplicationRecord
   has_many :item_details
   has_many :images, through: :item_details
   # has_many :bulletings, through: :item_datails
+
+  validates :title, presence: true
+  validates :starting_price, presence: true, numericality: { only_integer: true }
+  validates :duration, presence: true 
+  validates :shipping, presence: true  
 end
  
