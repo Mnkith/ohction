@@ -1,0 +1,19 @@
+<%= form_with model: @item do |f|   %>
+  <%= f.label :title %>
+  <%= f.text_field :title %><br>
+  <%= f.label :start_time %>
+  <%= f.text_field :start_time %><br>
+  <%= f.label :end_time %>
+  <%= f.text_field :end_time %><br>
+  <%= f.label :starting_price %>
+  <%= f.text_field :starting_price %><br>
+  <%= f.label :minumum_price %>
+  <%= f.text_field :minimum_price %><br>
+  <hr>
+  <%= f.fields_for :images do |img| %>
+    <%= img.file_field :path %><br>
+  <% end %>
+  <%= f.submit %><br>
+<% end %>
+<%%>
+<%%>
