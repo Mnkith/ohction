@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   # POST /sessions or /sessions.json
   def create
     # binding.pry
-    params.require(:user).permit(:email, :password)
+    # params.require(:user).permit(:email, :password)
     user = User.find_by(email: params[:user][:email].downcase)
     if user && user.authenticate(params[:user][:password])
       log_in user
