@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
-  layout false
+  before_action :logged_in_user, except: [:index]
+  # layout false
   def index 
     @items = Item.all
   end
@@ -13,6 +14,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    # binding.pry
+    @item = Item.find params[:id]
   end
 
   def update

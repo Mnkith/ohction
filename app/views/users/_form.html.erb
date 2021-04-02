@@ -3,6 +3,7 @@
     <div class="signup-content">
       <div class="signup-form">
         <h2 class="form-title">Sign up</h2>
+        <p class="alert alert-info" id="danger"><%= danger %></p>
         <% if user.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>

@@ -15,16 +15,16 @@
               </div>
             </div>
             <div class="card-body ">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text ">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title"></h5>
+              <p class="card-text "><%= item.title%></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
-              <li class="list-group-item">A third item</li>
+              <li class="list-group-item">Starting at:<%= item.start_time %> </li>
+              <li class="list-group-item">Starting price: $<%= item.starting_price %> </li>
+              <li class="list-group-item">Shipping: <%= item.shipping %> </li>
             </ul>
             <div class="card-body">
-              <a href="#" class="card-link">Card link</a>
+              <%=link_to "view item", item_path(item), class: "card-link" %>
               <a href="#" class="card-link">Another link</a>
             </div>
           </div>
