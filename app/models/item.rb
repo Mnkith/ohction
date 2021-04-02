@@ -6,7 +6,9 @@ class Item < ApplicationRecord
   has_many :images, through: :item_details
   has_many :bulletings, through: :item_details
 
-  accepts_nested_attributes_for :images
+  accepts_nested_attributes_for :images, reject_if: proc {|attributes| attributes['name'].blank?}
+  accepts_nested_attributes_for :bulletings, reject_if: proc {|attributes| attributes['name'].blank?}
+  
   validates :start_time, presence: true
   validate :start_time_must_be_in_futur
   validate :end_time_later_than_start_time

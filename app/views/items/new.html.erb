@@ -1,18 +1,41 @@
 <%= form_with model: @item do |f|   %>
+  
+  <%= f.hidden_field :seller_id, value: current_user.id%>
   <%= f.label :title %>
-  <%= f.text_field :title %><br>
+  <%= f.text_field :title %><%= @item.errors&.[](:title)[0] %><br>
+
   <%= f.label :start_time %>
-  <%= f.text_field :start_time %><br>
+  <%= f.datetime_field :start_time %><%= @item.errors&.[](:start_time)[0] %> <br>
+
   <%= f.label :end_time %>
-  <%= f.text_field :end_time %><br>
+  <%= f.datetime_field :end_time %><%= @item.errors&.[](:end_time)[0] %><br>
+
   <%= f.label :starting_price %>
-  <%= f.text_field :starting_price %><br>
+  $<%= f.number_field :starting_price %><%= @item.errors&.[](:starting_price)[0] %> <br>
+
+
   <%= f.label :minumum_price %>
-  <%= f.text_field :minimum_price %><br>
+  $<%= f.number_field :minimum_price %><%= @item.errors&.[](:minimum_price)[0] %><br>
+
+  <%= f.label :shipping %>
+  $<%= f.number_field :shipping %><%= @item.errors&.[](:shipping)[0] %> <br>
   <hr>
+
+  <h5>Upload some images for your item:</h5><br>
   <%= f.fields_for :images do |img| %>
     <%= img.file_field :path %><br>
   <% end %>
+  <hr>
+
+  <h5>List your item's features:</h5>
+  <ul>
+  <%= f.fields_for :bulletings do |blt| %>
+    <li><%= blt.text_field :bulleting, style: "border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: groove;background-color: #eee; outline: none; width: 70%" %><br></li>
+    <br>
+  <% end %>
+  </ul>
+  <hr>
+  
   <%= f.submit %><br>
 <% end %>
 <%%>

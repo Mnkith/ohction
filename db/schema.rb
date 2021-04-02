@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_03_31_040508) do
   create_table "items", force: :cascade do |t|
     t.string "title"
     t.integer "starting_price", default: 0
+    t.integer "minimum_price"
     t.datetime "start_time"
     t.datetime "end_time"
     t.string "condition"

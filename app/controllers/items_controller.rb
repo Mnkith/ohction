@@ -20,24 +20,31 @@ class ItemsController < ApplicationController
 
   def create 
     @item = Item.new item_params
+
+    
+
     if @item.valid?
       images = images_params["images_attributes"]
       upload_images @item, images
       @item.save
       redirect_to @item, notice: 'Your item was added successfully.'
     else
-      binding.pry
+      3.times do 
+        @item.images << Image.new
+        @item.bulletings << Bulleting.new
+      end 
+      # binding.pry
       # redirect_to new_user_item_path(current_user)
       # p render_to_string '/items/new'
       # render plain: "OK"
-      render :new, location: new_user_item_path(current_user)
+      render :new#, location: new_user_item_path(current_user)
     end
   end
 
   private
    
   def item_params
-    params.require(:item).permit(:title, :seller_id, :start_time, :end_time)
+    params.require(:item).permit(:title, :seller_id, :start_time, :end_time, bulletings_attributes:{})
   end
 
   def images_params
