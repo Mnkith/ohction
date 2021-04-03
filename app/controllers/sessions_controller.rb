@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_back_or user
     else
-      flash[:danger] = "Invalid email/password combination" # Don't know how flash message persist to render, thought we have to use flash.now
+      flash.now[:danger] = "Invalid email/password combination" # Don't know how flash message persist to render, thought we have to use flash.now
       render 'new'
     end
   end

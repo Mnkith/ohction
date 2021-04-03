@@ -1,42 +1,50 @@
-<%= form_with model: @item do |f|   %>
-  
-  <%= f.hidden_field :seller_id, value: current_user.id%>
-  <%= f.label :title %>
-  <%= f.text_field :title %><%= @item.errors&.[](:title)[0] %><br>
-
-  <%= f.label :start_time %>
-  <%= f.datetime_field :start_time %><%= @item.errors&.[](:start_time)[0] %> <br>
-
-  <%= f.label :end_time %>
-  <%= f.datetime_field :end_time %><%= @item.errors&.[](:end_time)[0] %><br>
-
-  <%= f.label :starting_price %>
-  $<%= f.number_field :starting_price %><%= @item.errors&.[](:starting_price)[0] %> <br>
-
-
-  <%= f.label :minumum_price %>
-  $<%= f.number_field :minimum_price %><%= @item.errors&.[](:minimum_price)[0] %><br>
-
-  <%= f.label :shipping %>
-  $<%= f.number_field :shipping %><%= @item.errors&.[](:shipping)[0] %> <br>
-  <hr>
-
-  <h5>Upload some images for your item:</h5><br>
-  <%= f.fields_for :images do |img| %>
-    <%= img.file_field :path %><br>
-  <% end %>
-  <hr>
-
-  <h5>List your item's features:</h5>
-  <ul>
-  <%= f.fields_for :bulletings do |blt| %>
-    <li><%= blt.text_field :bulleting, style: "border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: groove;background-color: #eee; outline: none; width: 70%" %><br></li>
-    <br>
-  <% end %>
-  </ul>
-  <hr>
-  
-  <%= f.submit %><br>
-<% end %>
-<%%>
-<%%>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ohction</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+  </head>
+  <body>
+    <div class='container width-70'>
+      <%= form_with model: @item do |f|   %>
+        <%= f.hidden_field :seller_id, value: current_user.id%>
+        <%= f.label :title %>
+        <%= f.text_field :title %><%= @item.errors&.[](:title)[0] %><br>
+        <%= f.label :start_time %>
+        <%= f.datetime_field :start_time %><%= @item.errors&.[](:start_time)[0] %> <br>
+        <%= f.label :end_time %>
+        <%= f.datetime_field :end_time %><%= @item.errors&.[](:end_time)[0] %><br>
+        <%= f.label :starting_price %>
+        $<%= f.number_field :starting_price %><%= @item.errors&.[](:starting_price)[0] %> <br>
+        <%= f.label :minumum_price %>
+        $<%= f.number_field :minimum_price %><%= @item.errors&.[](:minimum_price)[0] %><br>
+        <%= f.label :shipping %>
+        $<%= f.number_field :shipping %><%= @item.errors&.[](:shipping)[0] %> <br>
+        <hr>
+        <h5>Upload some images for your item:</h5>
+        <br>
+        <%= f.fields_for :images do |img| %>
+          <%= img.file_field :path %><br>
+        <% end %>
+        <hr>
+        <h5>List your item's features:</h5>
+        <ul>
+          <%= f.fields_for :bulletings do |blt| %>
+            <li><%= blt.text_field :bulleting, style: "border-top-style: hidden;border-right-style: hidden;border-left-style: hidden;border-bottom-style: groove;background-color: #eee; outline: none; width: 70%" %><br>
+            </li>
+            <br>
+          <% end %>
+        </ul>
+        <hr>
+        <%= f.submit %><br>
+      <% end %>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</html>
