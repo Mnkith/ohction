@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_31_040508) do
+ActiveRecord::Schema.define(version: 2021_04_03_164118) do
+
+  create_table "bids", force: :cascade do |t|
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "bulletings", force: :cascade do |t|
     t.string "bulleting"
@@ -20,8 +26,6 @@ ActiveRecord::Schema.define(version: 2021_03_31_040508) do
 
   create_table "images", force: :cascade do |t|
     t.string "path"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "item_details", force: :cascade do |t|
