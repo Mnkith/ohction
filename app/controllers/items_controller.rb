@@ -30,7 +30,8 @@ class ItemsController < ApplicationController
       images = images_params["images_attributes"]
       upload_images @item, images
       @item.save
-      redirect_to @item, notice: 'Your item was added successfully.'
+      flash.now[:notice] = 'Your item was added successfully.'
+      redirect_to @item 
     else
       3.times do 
         @item.images << Image.new
@@ -47,7 +48,7 @@ class ItemsController < ApplicationController
   private
    
   def item_params
-    params.require(:item).permit(:title, :seller_id, :start_time, :end_time, bulletings_attributes:{})
+    params.require(:item).permit(:title, :seller_id, :start_time, :end_time, :starting_price, :minimum_price, bulletings_attributes:{})
   end
 
   def images_params

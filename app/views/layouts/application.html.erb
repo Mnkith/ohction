@@ -38,7 +38,7 @@
         </ul>
         <% if current_user %>
           <h3 style="position: relative;right: 300px;color: rgba(97, 82, 236, 0.4);">Good </h3>
-          <form class="form-inline my-2 my-lg-0"  method="get">
+          <form class="form-inline my-2 my-lg-0" action='/users/<%= current_user.id %>'  method="get">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">My Account </button>
           </form>
         <% end %>
