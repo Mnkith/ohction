@@ -23,17 +23,17 @@
   <hr>
   <div class="card-body ">
     <h5 class="card-title"></h5>
-    <%= tag.h4 item.title, class:"card-text "%>
+    <%# <%= tag.h4 item.title, class:"card-text "%> %>
   </div>
   <ul class="list-group list-group-flush" style="list-style-type:none;">
-    <li class="list-group-item">Starting at:<%= item.start_time.localtime %> </li>
-    <li class="list-group-item">Starting price: $<%= item.starting_price %> </li>
-    <li class="list-group-item">Shipping: <%= status_based_display @item  %> </li>
+    <!--<li class="list-group-item">Starting at:<%= item.start_time.localtime %> </li>
+    <li class="list-group-item">Starting price: $<%= item.starting_price %> </li>-->
+    <li class="list-group-item">Shipping: <%= status_based_display @item  %> </li> 
   </ul>
-  <div class="card-body">
+  <!--<div class="card-body">
     <%=link_to "view item", item_path(item), class: "card-link" %>
     <a href="#" class="card-link">Another link</a>
-  </div>
+  </div> -->
 </div>
 <%= tag.hr %>
 <%= tag.h2 'Item detail:' %>
