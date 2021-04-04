@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag '/assets/fonts/material-icon/css/material-design-iconic-font.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
+    
     <style>
       * {box-sizing:border-box}
       
@@ -102,6 +104,7 @@
         from {opacity: .4}
         to {opacity: 1}
       }
+      
     </style>
   </head>
   <body>
@@ -111,7 +114,7 @@
 
 
 
-  
+
     <%= yield %>
 
 
