@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_04_03_164118) do
 
   create_table "bids", force: :cascade do |t|
-    t.integer "amount"
+    t.integer "amount", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

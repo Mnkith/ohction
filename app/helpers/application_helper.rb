@@ -10,9 +10,10 @@ module ApplicationHelper
       item.active? ? tag.li("Can't Edit an item under active auction", class: 'list-group-item') : tag.li(tag.a("Edit this item", href: edit_item_path(item)), class: 'list-group-item')
     elsif item.active?
       # tag.li(item.title, class: 'list-group-item') <<
-      form_with(Bid.new) do |f|
-        f.number_field :amount
-        f.submit 'Place your bid'
+      form_with model: Bid.new do |f|
+        tag.li("Started at: #{item.start_time}", class: 'list-group-item') + tag.br <<
+        f.number_field( :amount ) <<
+        f.submit('Place your bid')
       end
       
     end
