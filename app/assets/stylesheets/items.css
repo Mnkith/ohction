@@ -20,7 +20,7 @@
   width: auto;
   margin-top: -22px;
   padding: 16px;
-  color: white;
+  color: rgba(12, 3, 3, 0.877);
   font-weight: bold;
   font-size: 18px;
   transition: 0.6s ease;
@@ -30,7 +30,12 @@
 
 /* Position the "next button" to the right */
 .next {
-  right: 0;
+  right: 225px;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 225px;
   border-radius: 3px 0 0 3px;
 }
 
