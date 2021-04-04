@@ -1,11 +1,16 @@
 class BidsController < ApplicationController
   def create
-    bid = Bid.new amount: params.require(:bid).permit(:amount)
-    binding.pry
+    @bid = Bid.new params.require(:bid).permit(:amount, :item_id)
+    @bid.user = current_user
+    # @bid.valid?
+    # binding.pry
     
-    # if bid.valid?
+    if @bid.valid?
+
+    end
+
       
 
-    redirect_to users_path
+    redirect_to item_path(@bid.item)
   end
 end

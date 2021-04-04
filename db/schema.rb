@@ -14,8 +14,12 @@ ActiveRecord::Schema.define(version: 2021_04_03_164118) do
 
   create_table "bids", force: :cascade do |t|
     t.integer "amount", default: 0
+    t.integer "user_id"
+    t.integer "item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_bids_on_item_id"
+    t.index ["user_id"], name: "index_bids_on_user_id"
   end
 
   create_table "bulletings", force: :cascade do |t|
