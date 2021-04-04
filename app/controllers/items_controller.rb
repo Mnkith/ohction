@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  # include ItemsHelper::InstanceHelper
   before_action :logged_in_user, except: [:index]
   layout 'item_layout', only: [:show]
   # layout false
@@ -57,6 +58,7 @@ class ItemsController < ApplicationController
   end
 
   def upload_images(item, images)
+    if images
     images.each do |_, image|
       uploaded_file = image[:path]
       File.open(Rails.root.join('app', 'assets', 'images', uploaded_file.original_filename), 'wb') do |file|
@@ -64,6 +66,10 @@ class ItemsController < ApplicationController
       end
       item.images << Image.create(path: uploaded_file.original_filename)
     end
+  else
+    
+    item.images << Image.find_or_create_by(path: 'no_image.jpg')
+  end
   end
 
   
