@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.string :title
       t.integer :starting_price, default: 0
       t.integer :minimum_price
-      t.integer :current_price
+      t.integer :current_price, default: 0
       t.datetime :start_time
       t.datetime :end_time
       t.string :condition

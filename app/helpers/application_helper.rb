@@ -9,8 +9,10 @@ module ApplicationHelper
       tag.li 'Your the owner of this item', class: 'list-group-item'
       item.active? ? tag.li("Can't Edit an item under active auction", class: 'list-group-item') : tag.li(tag.a("Edit this item", href: edit_item_path(item)), class: 'list-group-item')
     elsif item.active?
-      # tag.li(item.title, class: 'list-group-item') <<
-      tag.li("Started at: #{item.start_time}", class: 'list-group-item')  <<
+      tag.li(item.title, class: 'list-group-item') <<
+      tag.li("Starting price:#{item.starting_price}", class: 'list-group-item') <<
+      tag.li("Current price:#{item.starting_price + item.current_price}", class: 'list-group-item') <<
+      tag.li("Auction started at: #{item.start_time}", class: 'list-group-item')  <<
       form_with(model: Bid.new) do |f|
         f.hidden_field(:item_id, value: item.id) <<
         f.number_field( :amount ) <<
