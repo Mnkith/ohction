@@ -8,10 +8,14 @@ module ItemsHelper
     def ended?
       Item.dezone(Time.now) > Item.dezone(end_time)
     end
-
+    
     def sold?
-    ended? && 7 > minumum_price
+      ended? && 7 > minumum_price
       # !!self.buyer_id
+    end
+    
+    def active?
+      started? && !ended?
     end
 
     def set_sold
@@ -25,19 +29,18 @@ module ItemsHelper
       seller_id == current_user.id
     end
 
-    def status_based_display 
-      if sold?
-        tag.div
-      if owner? current_user
-        ApplicationHelper.content_tag :li, 'You own this item', class:"list-group-item"
-      end
+    # def status_based_display item
+    #   if item.sold?
+    #     tag.li 'this item is sold', class:"list-group-item"
+    #   elsif item.owner? current_user
+    #     true
+    #   end
 
-    end
+    # enddef 
+    
   end
 
-  def active?
-    started? && !ended?
-  end
+  
 
   module ClassHelper
     def dezone(time)
