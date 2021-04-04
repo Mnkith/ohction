@@ -45,4 +45,11 @@ class Item < ApplicationRecord
   # def self.dezone time
   #   time.strftime('%Y-%m-%d %H:%M:%S')
   # end
+
+  # def status_based_display current_user
+  #   if owner? current_user
+  #     content_tag :li, 'You own this item', class:"list-group-item"
+  #   end
+
+  # end
 end

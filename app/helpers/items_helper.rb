@@ -1,4 +1,5 @@
 module ItemsHelper
+  include ActionView::Helpers::TagHelper
   module InstanceHelper
     def started?
       Item.dezone(Time.now) >= Item.dezone(start_time)
@@ -9,11 +10,28 @@ module ItemsHelper
     end
 
     def sold?
-      !!self.buyer_id
+    ended? && 7 > minumum_price
+      # !!self.buyer_id
     end
 
-    def display_status
-      
+    def set_sold
+      self.images.clear 
+      self.images << Image.find_by(path: 'sold.jpg')
+      buyer_id = Bid.last.user_id
+    end
+
+    def owner? current_user
+      # binding.pry
+      seller_id == current_user.id
+    end
+
+    def status_based_display 
+      if sold?
+        tag.div
+      if owner? current_user
+        ApplicationHelper.content_tag :li, 'You own this item', class:"list-group-item"
+      end
+
     end
   end
 

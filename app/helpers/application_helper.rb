@@ -1,4 +1,12 @@
 module ApplicationHelper
+  include ItemsHelper::InstanceHelper
+
+  # def status_based_display current_user
+  #   if owner? current_user
+  #     ApplicationHelper.content_tag :li, 'You own this item', class:"list-group-item"
+  #   end
+
+  # end
 
   def navbar
     tag.nav(class:"navbar navbar-expand-lg navbar-light bg-light sticky-top") do
