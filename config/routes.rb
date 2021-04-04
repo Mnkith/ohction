@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :users do
     resources :items, only: [:index, :new]
   end
+
+  resources :items do
+    resources :bids, only: [:create]
+  end
+
   # get '/items/new', to: 'items#new'
   resources :items, only: [:show, :edit, :update, :destroy, :create, :new]
   resources :users, :bids
