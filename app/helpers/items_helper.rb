@@ -33,6 +33,10 @@ module ItemsHelper
   end
 
   def started?
-    
+
+  end
+
+  def dezone time
+    time.strftime('%Y-%m-%d %H:%M:%S')
   end
 end

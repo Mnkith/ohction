@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  extend ItemsHelper
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true # buyer_id won't be set
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'               # until someone buyes the item
   # hence optional: true
@@ -16,7 +17,7 @@ class Item < ApplicationRecord
   validate :end_time_later_than_start_time
 
   def start_time_must_be_in_futur
-    if start_time && (start_time.strftime('%Y-%m-%d %H:%M:%S') < Time.now.strftime('%Y-%m-%d %H:%M:%S'))
+    if start_time && (Item.dezone(start_time) < Item.dezone(Time.now))
       errors.add(:start_time,
                  'must be in the future!')
     end
@@ -38,5 +39,9 @@ class Item < ApplicationRecord
   #     end
   #     item.images << Image.create(path: uploaded_file.original_filename)
   #   end
+  # end
+
+  # def self.dezone time
+  #   time.strftime('%Y-%m-%d %H:%M:%S')
   # end
 end
