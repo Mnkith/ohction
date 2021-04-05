@@ -8,8 +8,8 @@ class BidsController < ApplicationController
     if @bid.valid?
       item = @bid.item
       item.current_price += @bid.amount
-      binding.pry
-      item.buyer = current_user if item.sold?
+      # binding.pry
+      item.set_sold if item.sold?
       item.save
       @bid.save
       # redirect_to item_path(item)

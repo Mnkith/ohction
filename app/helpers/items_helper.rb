@@ -10,7 +10,7 @@ module ItemsHelper
     end
     
     def sold?
-      ended? && (current_price + starting_price) > minumum_price
+      ended? && (current_price + starting_price) > minimum_price
       # !!self.buyer_id
     end
     
@@ -19,9 +19,9 @@ module ItemsHelper
     end
 
     def set_sold
-      self.images.clear 
-      self.images << Image.find_by(path: 'sold.jpg')
-      buyer_id = Bid.last.user_id
+      # self.images.clear 
+      self.images.unshift Image.find_by(path: 'sold.jpg')
+      buyer = Bid.last.user
     end
 
     def owner? current_user
