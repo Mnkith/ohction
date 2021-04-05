@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   include SessionsHelper
+  layout 'sessions_layout'
   # before_action :set_session, only: %i[show edit update destroy]
 
   # GET /sessions or /sessions.json

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  layout 'sessions_layout'
   before_action :logged_in_user, only: [:show]
   before_action :current_user, only: %i[show edit update destroy]
   # GET /users or /users.json

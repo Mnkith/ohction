@@ -10,7 +10,7 @@ module ItemsHelper
     end
     
     def sold?
-      ended? && 7 > minumum_price
+      ended? && (current_price + starting_price) > minumum_price
       # !!self.buyer_id
     end
     
