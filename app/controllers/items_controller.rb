@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
   # include ItemsHelper::InstanceHelper
-  before_action :logged_in_user, except: [:index]
+  before_action :logged_in_user, except: [:home]
   layout 'item_layout', only: [:show]
   # layout false
   def index 
-    @items = Item.all
+    @user = User.find_by(params[:id])
   end
   
   def home 

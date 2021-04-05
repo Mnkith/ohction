@@ -1,5 +1,4 @@
 module ItemsHelper
-  include ActionView::Helpers::TagHelper
   module InstanceHelper
     def started?
       Item.dezone(Time.now) >= Item.dezone(start_time)
@@ -19,7 +18,6 @@ module ItemsHelper
     end
 
     def set_sold
-      # binding.pry
       self.images.clear
       self.images << Image.find_or_create_by(path: 'sold.jpg')
       self.buyer_id = Bid.last.user_id
@@ -30,19 +28,43 @@ module ItemsHelper
       # binding.pry
       seller_id == current_user.id
     end
-
-    # def status_based_display item
-    #   if item.sold?
-    #     tag.li 'this item is sold', class:"list-group-item"
-    #   elsif item.owner? current_user
-    #     true
-    #   end
-
-    # enddef 
     
   end
 
   
+
+  def status_based_display item
+    if item.sold?
+      binding.pry
+      tag.li('This item is sold', class: 'list-group-item' ) <<
+      tag.li("Auction ended at: #{item.end_time}") << 
+      tag.li("Item bought by: #{item.buyer.name}")<< 
+      tag.li("Item sold for: #{item.current_price + item.starting_price}") 
+
+    elsif item.owner? current_user
+      tag.li 'Your the owner of this item', class: 'list-group-item'
+      item.active? ? tag.li("Can't Edit an item under active auction", class: 'list-group-item') : tag.li(tag.a("Edit this item", href: edit_item_path(item)), class: 'list-group-item')
+    elsif item.active?
+      tag.li("Auction started at: #{item.start_time}", class: 'list-group-item')  <<
+      tag.li("Auction will end at: #{item.end_time}", class: 'list-group-item')  <<
+      tag.li("Starting price: $#{item.starting_price}", class: 'list-group-item') <<
+      tag.li("Shipping: $#{item.shipping}", class: 'list-group-item') <<
+      tag.li("Current price: $#{item.starting_price + item.current_price}", class: 'list-group-item') <<
+      form_with(model: Bid.new) do |f|
+        f.hidden_field(:item_id, value: item.id) <<
+        f.number_field( :amount ) <<
+        f.submit('Place your bid')
+      end
+    else
+      tag.li("Auction will start at: #{item.start_time}", class: 'list-group-item')  <<
+      tag.li("Auction will end at: #{item.end_time}", class: 'list-group-item')  <<
+      tag.li("Starting price: $#{item.starting_price}", class: 'list-group-item') <<
+      tag.li("Shipping: $#{item.shipping}", class: 'list-group-item')
+
+      
+    end
+  
+  end
 
   module ClassHelper
     def dezone(time)
@@ -58,27 +80,8 @@ module ItemsHelper
                 image_tag image.path, class: 'd-block w-30 img-fluid'
               end
             end
-            # tag.div class: "carousel-item  p-1 border bg-dark " do
-            #    image_tag "signin-image.jpg", class:"d-block w-30 img-fluid"
-            # end
-            # tag.div class: "carousel-item  p-1 border bg-dark" do
-            #    image_tag "signup-image-2.jpg", class:"d-block w-30 img-fluid"
-            # end
           end
         end
-        # tag.div class: "card-body " do
-        #   tag.h5 'Card title', class: "card-title"
-        #   # p class: "card-text" Some quick example text to build on the card title and make up the bulk of the card's content./p
-        # end
-        # ul class: "list-group list-group-flush"
-        #   li class: "list-group-item" An item/li
-        #   li class: "list-group-item" A second item/li
-        #   li class: "list-group-item" A third item/li
-        # /ul
-        # tag.div class: "card-body" do
-        #   a href: "#" class: "card-link" Card link/a
-        #   a href: "#" class: "card-link" Another link/a
-        # end
       end
     end
   end

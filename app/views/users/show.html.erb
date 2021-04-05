@@ -11,6 +11,7 @@
 </p>
 
 <%= link_to 'Back', users_path %> |
-<%= link_to 'Edit', ['edit', @current_user] %> or <br>
-manage your items <%= link_to 'here', new_user_item_path(@current_user) %>  
+<%= link_to 'Edit', ['edit', @current_user] %>  <hr>
+Create new item <%= link_to 'here', new_user_item_path(@current_user) %> or <br>
+Manage your existing items  <%= link_to 'here', user_items_path(@current_user) %>  
 
