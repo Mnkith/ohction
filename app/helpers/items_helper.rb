@@ -19,9 +19,11 @@ module ItemsHelper
     end
 
     def set_sold
-      # self.images.clear 
-      self.images.unshift Image.find_by(path: 'sold.jpg')
-      buyer = Bid.last.user
+      # binding.pry
+      self.images.clear
+      self.images << Image.find_or_create_by(path: 'sold.jpg')
+      self.buyer_id = Bid.last.user_id
+      self.save
     end
 
     def owner? current_user
