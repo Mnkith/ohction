@@ -1,0 +1,35 @@
+<div class="container ">
+  <br>
+   <div class="row  ">
+    <%# <div class="col-sm-4 ">  %>
+      <div class="card-columns">  
+        <% @items.each do |item| %>
+          <div class="card d-inline-block card-columns col-sm-3" style="width: 18rem;">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% item.images.each do |image| %>
+                  <div class="carousel-item <%= "active" if image == item.images.first %> ">
+                    <%= image_tag image.path, class:"d-block w-30 img-fluid", style: "height: 300px"%>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-body ">
+              <h5 class="card-title"></h5>
+              <p class="card-text "><%= item.title%></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Starting at:<%= item.start_time %> </li>
+              <li class="list-group-item">Starting price: $<%= item.starting_price %> </li>
+              <li class="list-group-item">Shipping: <%= item.shipping %> </li>
+            </ul>
+            <div class="card-body">
+              <%=link_to "view item", item_path(item), class: "card-link" %>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        <% end %>
+      <%# <%# </div> %>
+    </div>
+  </div> 
+</div>
