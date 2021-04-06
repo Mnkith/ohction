@@ -3,10 +3,10 @@ module ApplicationHelper
   # extend ItemsHelper::ClassHelper
 
 
-  def labeled_field form_builder, attrbt, classes
+  def labeled_field form_builder, attrbt, classes, ph
     tag.div(class: "form-group") do 
-      form_builder.label(attrbt, '.', class: "zmdi zmdi-email") <<
-      form_builder.text_field(attrbt, id: attrbt, placeholder: "Your #{attrbt}")
+      form_builder.label(attrbt, '.', class: classes) <<
+      form_builder.text_field(attrbt, id: attrbt, placeholder: ph)
     end
   end
   
