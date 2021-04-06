@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout 'sessions_layout', only:[:new]
+  layout 'sessions_layout', only:[:new, :edit]
   before_action :logged_in_user, only: [:show]
   before_action :current_user, only: %i[show edit update destroy]
   # GET /users or /users.json
@@ -25,13 +25,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    # binding.pry
     if @user.save
       log_in(@user)
-      @user = current_user
-      redirect_to @user, notice: 'User was successfully created.'
+      redirect_to current_user, notice: 'User was successfully created.'
     else
-      render :new#, status: :unprocessable_entity 
+      render :new 
     end
   end
 
@@ -58,15 +56,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  # This disabled because it relies on URL dynamic segment to extract id for 
-  # any user including none-existent or not logged in user, use #current_user instead
-  # def set_user
-  #   @user = User.find(params[:id])
-  # end
-
-  # Only allow a list of trusted parameters through.
   def user_params
     params.require(:user).permit(:name, :email, :password)
   end
