@@ -31,7 +31,31 @@ module ItemsHelper
     
   end
 
-  
+  def display_user_items user
+    if user.purchases
+      tag.table class:"table table-hover" do
+        tag.thead  do
+          tag.tr  do
+            tag.th scope:"col" '#'
+            tag.th scope:"col" 'Item title'
+            tag.th scope:"col" 'Price'
+            tag.th scope:"col" 'Handle'
+          end
+        end
+        # user.purchases.each
+    
+      tag.tbody  do
+        tag.tr  do
+          tag.th scope:"row" '1' do
+            tag.td "Mark"
+            tag.td "Otto"
+            tag.td "@mdo"
+          end
+        end
+      end
+
+    end
+  end
 
   def status_based_display item
     if item.sold?
