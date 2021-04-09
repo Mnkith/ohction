@@ -1,17 +1,22 @@
-<%= form_with(model: session) do |form| %>
-  <% if session.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(session.errors.count, "error") %> prohibited this session from being saved:</h2>
-
-      <ul>
-        <% session.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<section class="<%= action_class action%>">
+  <div class="container">
+    <div class="<%= action_class action%>-content">
+      <div class="<%= action_class action%>-form">
+        <h2 class="form-title"><%= action_title action %></h2>
+        <%= sign_up_in_or_update action  %>
+         <div class="social-login">
+          <span class="social-label">Or login with</span>
+          <ul class="socials">
+            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="<%= action_class action%>-image">
+        <figure><%= image_tag "#{action_class action}-image.jpg", alt: "sing up image" %></figure>
+        <%= action_link action %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
+    <%= link_to 'Back', '/' %>
   </div>
-<% end %>
+</section>
