@@ -27,19 +27,15 @@ module ApplicationHelper
 
   def sign_up_in_or_update action
     user = current_user || User.new
-    # binding.pry
     form_with(model: user, class: "register-form", url:(login_path if action == 'Sign in')) do |form| 
-      if action != 'Sign in'
-        labeled_field(form,'name', "zmdi zmdi-account material-icons-name", "Your Name")
-      else 
-        tag.h1
-      end <<
-      labeled_field(form, 'email', "zmdi zmdi-email", "Your Email") +
-      labeled_field(form, 'password', "zmdi zmdi-lock", "Your Password") +
-      if action != 'Sign in'
-        labeled_field(form, 'password_cofirmation', "zmdi zmdi-lock-outline", "Confirm Password") 
-      else 
-        tag.h1
+      if action == 'Sign in'
+        labeled_field(form, 'email', "zmdi zmdi-email", "Your Email") +
+        labeled_field(form, 'password', "zmdi zmdi-lock", "Your Password") 
+      else
+        labeled_field(form, 'name', "zmdi zmdi-account material-icons-name", "Your Name") +
+        labeled_field(form, 'email', "zmdi zmdi-email", "Your Email") +
+        labeled_field(form, 'password', "zmdi zmdi-lock", "Your Password") +
+        labeled_field(form, 'password_cofirmation', "zmdi zmdi-lock-outline", "Confirm Password")
       end <<
       tag.div(class:"form-group form-button") do 
         form.submit(id: "signup", class: "form-submit", value: action) 
@@ -52,7 +48,7 @@ module ApplicationHelper
   end
 
   def action_title action 
-    action == 'Update' ? 'Update account' :  action
+    action == 'Update' ? 'Edit account ' :  action
   end
 
   def action_link action 
