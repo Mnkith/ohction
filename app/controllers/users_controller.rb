@@ -3,9 +3,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:show, :edit]
   before_action :current_user, only: %i[show edit update destroy]
 
-  def index
-    @users = User.all
-  end
+  
 
   
   def show
@@ -20,6 +18,7 @@ class UsersController < ApplicationController
 
   
   def edit
+    # @user = current_user
   end
 
   def create
@@ -28,18 +27,21 @@ class UsersController < ApplicationController
       log_in(@user)
       redirect_to current_user, notice: 'User was successfully created.'
     else
-      render :new 
+      render :new, layout: 'sessions_layout'
     end
   end
 
   
   def update
-    if current_user.update user_params
+
+    if @current_user.update user_params
       redirect_to current_user, notice: 'Your acount was updated successfully'
     else
+      
       # binding.pry
+      # @user = 
       render :edit, layout: 'sessions_layout'
-      # redirect_to edit_user_path(current_user)
+      # redirect_to edit_user_path(@current_user)
     end
     
   end

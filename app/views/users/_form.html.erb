@@ -3,7 +3,7 @@
     <div class="<%= action_class action%>-content">
       <div class="<%= action_class action%>-form">
         <h2 class="form-title"><%= action_title action %></h2>
-        <%= sign_up_in_or_update action  %>
+        <%= sign_up_in_or_update user, action  %>
       </div>
       <div class="<%= action_class action%>-image">
         <figure><%= image_tag "#{action_class action}-image.jpg", alt: "sing up image" %></figure>
