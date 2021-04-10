@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   layout 'sessions_layout', only:[:new, :edit]
-  before_action :logged_in_user, only: [:show]
+  before_action :logged_in_user, only: [:show, :edit]
   before_action :current_user, only: %i[show edit update destroy]
 
   def index
@@ -20,7 +20,6 @@ class UsersController < ApplicationController
 
   
   def edit
-   
   end
 
   def create
@@ -35,17 +34,18 @@ class UsersController < ApplicationController
 
   
   def update
-    
+    if current_user.update user_params
+      redirect_to current_user, notice: 'Your acount was updated successfully'
+    else
+      binding.pry
+      render :edit
+    end
     
   end
 
   
   def destroy
     @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private

@@ -3,6 +3,7 @@
     <div class="<%= action_class action%>-content">
       <div class="<%= action_class action%>-form">
         <h2 class="form-title"><%= action_title action %></h2>
+        <p id="alert"><%= flash[:alert] %></p>
         <%= sign_up_in_or_update action  %>
          <div class="social-login">
           <span class="social-label">Or login with</span>
