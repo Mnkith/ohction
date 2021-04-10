@@ -5,6 +5,7 @@ module ApplicationHelper
 
   def labeled_field form_builder, user, attrbt, classes, ph
     tag.div(class: "form-group") do 
+      # binding.pry
       form_builder.label(attrbt, '.', class: classes) <<
       form_builder.text_field(attrbt, id: attrbt, placeholder: ph) << user.field_error(attrbt)
     end
@@ -26,7 +27,6 @@ module ApplicationHelper
   end
 
   def sign_up_in_or_update user, action 
-    # user = current_user || User.new
     form_with(model: user, class: "register-form", url:(login_path if action == 'Sign in')) do |form| 
       if action == 'Sign in'
         labeled_field(form, user, 'email', "zmdi zmdi-email", "Your Email") +

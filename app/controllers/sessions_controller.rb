@@ -10,21 +10,21 @@ class SessionsController < ApplicationController
 
   
   def create
-    # binding.pry
-    # params.require(:user).permit(:email, :password)
     user = User.find_by(email: params[:user][:email].downcase)
     if user && user.authenticate(params[:user][:password])
       log_in user
       redirect_back_or user
     else
       # flash.now.alert = "Invalid email/password combination" # Don't know how flash message persist to render, thought we have to use flash.now
-      flash.now[:error] = "Could not save client"
+      @user = User.new
+      flash.discard[:alert] = "Could not save client"
       render 'new'
     end
   end
 
   def fb_login
-    @user = User.find_or_create_by(id: auth['uid']) do |u|
+    # @user = User.find_or_create_by(uid: auth['uid']) do |u| #why not use email as id to avoid duplicates and email uniqness clash
+    @user = User.find_or_create_by(email: auth['info']['email']) do |u|
       # binding.pry
       u.name = auth['info']['name']
       u.email = auth['info']['email']
