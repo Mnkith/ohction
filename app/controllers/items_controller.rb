@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
-    3.times do 
+    5.times do 
       @item.images << Image.new
       @item.bulletings << Bulleting.new
     end
@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
       flash.now[:notice] = 'Your item was added successfully.'
       redirect_to @item 
     else
-      3.times do 
+      5.times do 
         @item.images << Image.new
         @item.bulletings << Bulleting.new
       end 

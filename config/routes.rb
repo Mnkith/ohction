@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
+  # get '/auth/:provider/callback', to: 'sessions#fb_login' 
+  get '/auth/facebook/callback', to: 'sessions#fb_login' 
   # post '/signup', to: 'users#new'
   # get 'account', to: 'users#show'
   resources :users do

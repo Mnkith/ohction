@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_03_164118) do
+ActiveRecord::Schema.define(version: 2021_04_09_185300) do
 
   create_table "bids", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 2021_04_03_164118) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uid"
+    t.string "image"
   end
 
   add_foreign_key "items", "users", column: "buyer_id"
