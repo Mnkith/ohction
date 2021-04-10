@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container col-9 ">
   <br>
    <div class="row  ">
     <%# <div class="col-sm-4 ">  %>
@@ -21,7 +21,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Starting at:<%= item.start_time %> </li>
               <li class="list-group-item">Starting price: $<%= item.starting_price %> </li>
-              <li class="list-group-item">Shipping: <%= item.shipping %> </li>
+              <li class="list-group-item">Shipping: $<%= item.shipping %> </li>
             </ul>
             <div class="card-body">
               <%=link_to "view item", item_path(item), class: "card-link" %>
