@@ -5,12 +5,11 @@ module ItemsHelper
     end
 
     def ended?
-      Item.dezone(Time.now) > Item.dezone(end_time)
+      Item.dezone(Time.now) >= Item.dezone(end_time)
     end
     
     def sold?
       ended? && (current_price + starting_price) > minimum_price
-      # !!self.buyer_id
     end
     
     def active?
