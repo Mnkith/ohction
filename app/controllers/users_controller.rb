@@ -37,8 +37,9 @@ class UsersController < ApplicationController
     if current_user.update user_params
       redirect_to current_user, notice: 'Your acount was updated successfully'
     else
-      binding.pry
-      render :edit
+      # binding.pry
+      render :edit, layout: 'sessions_layout'
+      # redirect_to edit_user_path(current_user)
     end
     
   end

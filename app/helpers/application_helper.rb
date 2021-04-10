@@ -3,10 +3,10 @@ module ApplicationHelper
   # extend ItemsHelper::ClassHelper
 
 
-  def labeled_field form_builder, attrbt, classes, ph
+  def labeled_field form_builder, user, attrbt, classes, ph
     tag.div(class: "form-group") do 
       form_builder.label(attrbt, '.', class: classes) <<
-      form_builder.text_field(attrbt, id: attrbt, placeholder: ph)
+      form_builder.text_field(attrbt, id: attrbt, placeholder: ph) << user&.errors&.[](attrbt)[0]
     end
   end
   
@@ -29,13 +29,13 @@ module ApplicationHelper
     user = current_user || User.new
     form_with(model: user, class: "register-form", url:(login_path if action == 'Sign in')) do |form| 
       if action == 'Sign in'
-        labeled_field(form, 'email', "zmdi zmdi-email", "Your Email") +
-        labeled_field(form, 'password', "zmdi zmdi-lock", "Your Password") 
+        labeled_field(form, user, 'email', "zmdi zmdi-email", "Your Email") +
+        labeled_field(form, user, 'password', "zmdi zmdi-lock", "Your Password") 
       else
-        labeled_field(form, 'name', "zmdi zmdi-account material-icons-name", "Your Name") +
-        labeled_field(form, 'email', "zmdi zmdi-email", "Your Email") +
-        labeled_field(form, 'password', "zmdi zmdi-lock", "Your Password") +
-        labeled_field(form, 'password_cofirmation', "zmdi zmdi-lock-outline", "Confirm Password")
+        labeled_field(form, user, 'name', "zmdi zmdi-account material-icons-name", "Your Name") + 
+        labeled_field(form, user, 'email', "zmdi zmdi-email", "Your Email") +
+        labeled_field(form, user, 'password', "zmdi zmdi-lock", "Your Password") +
+        labeled_field(form, user, 'password_cofirmation', "zmdi zmdi-lock-outline", "Confirm Password")
       end <<
       tag.div(class:"form-group form-button") do 
         form.submit(id: "signup", class: "form-submit", value: action) 
