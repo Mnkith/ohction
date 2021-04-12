@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     else
       # flash.now.alert = "Invalid email/password combination" # Don't know how flash message persist to render, thought we have to use flash.now
       @user = User.new
-      flash.discard[:alert] = "Could not save client"
+      flash.discard[:alert] = "Wrong email/password compination"
       render 'new'
     end
   end

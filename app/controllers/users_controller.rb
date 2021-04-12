@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
   
   def destroy
-    @user.destroy
+    render '/items/home'
   end
 
   private
