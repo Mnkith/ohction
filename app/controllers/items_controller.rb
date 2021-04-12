@@ -4,7 +4,8 @@ class ItemsController < ApplicationController
   layout 'item_layout', only: [:show]
   # layout false
   def index 
-    @user = User.find_by(params[:id])
+    # @user = User.find_by(params[:id])
+    @purchases = current_user.purchases
   end
   
   def home 

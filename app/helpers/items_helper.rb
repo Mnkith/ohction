@@ -30,31 +30,37 @@ module ItemsHelper
     
   end
 
-  # def display_user_items user
-  #   if user.purchases
-  #     tag.table class:"table table-hover" do
-  #       tag.thead  do
-  #         tag.tr  do
-  #           tag.th scope:"col" '#'
-  #           tag.th scope:"col" 'Item title'
-  #           tag.th scope:"col" 'Price'
-  #           tag.th scope:"col" 'Handle'
-  #         end
-  #       end
-  #       # user.purchases.each
-    
-  #     tag.tbody  do
-  #       tag.tr  do
-  #         tag.th scope:"row" '1' do
-  #           tag.td "Mark"
-  #           tag.td "Otto"
-  #           tag.td "@mdo"
-  #         end
-  #       end
-  #     end
+  def display_user_purchases 
+    item = current_user.purchases.first
+    tag.h3('Items you bought') +
+    tag.hr +
+    if current_user.purchases
+      tag.table(class:"table table-hover") do
+        tag.thead  do
+          tag.tr  do
+            tag.th('#', scope:"col") +
+            tag.th('Item', scope:"col") +
+            tag.th('Seller', scope:"col") +
+            tag.th('Bought on', scope:"col") +
+            tag.th('Total Price', scope:"col")
+          end
+        end 
+        current_user.purchases.map.with_index(1) do |item, i|
+         s= tag.tbody  do
+            tag.tr  do 
+              tag.th(i, scope:"row") +
+              tag.td(item.title) +
+              tag.td(item.seller.name) +
+              tag.td("@mdo") 
+              
+            end
+          end
+          render s
+        end
+      end
 
-  #   end
-  # end
+    end
+  end
 
   def status_based_display item
     if item.sold?
