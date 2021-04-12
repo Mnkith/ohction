@@ -4,7 +4,7 @@
 <div class="container col-9" >
 <h3>Your purchased items</h3>
   <%# <%= display_user_purchases%>
-  <% if current_user.purchases%>
+  <% unless current_user.purchases.empty?%>
     <table class="table table-hover">
       <thead>
         <tr>
@@ -19,6 +19,28 @@
       </tbody>
     </table>
   <% else %>
-    <h5>You dont any purchaces</h5>
+    <h5>You don't have any purchaces yet</h5>
+  <% end %>
+  <br>
+  <hr><h3>Your listed items</h3> <hr>
+  <% unless current_user.sales.empty? %>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <%# <th scope="col">#</th> %>
+          <th scope="col">Item</th>
+          <th scope="col">Starting price</th>
+          <th scope="col">Minimum price</th>
+          <th scope="col">Starts on</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'users/sale', collection: current_user.sales %>
+      </tbody>
+    </table>
+    <%= link_to 'Add more items', new_item_path %>
+  <% else %>
+    <h5>You don't have any listed items yet</h5>
+    <%= link_to 'Add items', new_item_path %>
   <% end %>
 </div>
