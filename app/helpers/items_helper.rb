@@ -64,7 +64,7 @@ module ItemsHelper
 
   def status_based_display item
     if item.sold?
-      binding.pry
+      # binding.pry
       tag.li('This item is sold', class: 'list-group-item' ) <<
       tag.li("Auction ended at: #{item.end_time}") << 
       tag.li("Item bought by: #{item.buyer.name}")<< 
