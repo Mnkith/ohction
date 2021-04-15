@@ -3,13 +3,13 @@ module ApplicationHelper
   # extend ItemsHelper::ClassHelper
 
 
-  def labeled_field form_builder, user, attrbt, classes, ph
-    tag.div(class: "form-group") do 
-      # binding.pry
-      form_builder.label(attrbt, '.', class: classes) <<
-      form_builder.text_field(attrbt, id: attrbt, placeholder: ph) << user.field_error(attrbt)
-    end
-  end
+  # def labeled_field form_builder, user, attrbt, classes, ph
+  #   tag.div(class: "form-group") do 
+  #     # binding.pry
+  #     form_builder.label(attrbt, '.', class: classes) <<
+  #     form_builder.text_field(attrbt, id: attrbt, placeholder: ph) << user.field_error(attrbt)
+  #   end
+  # end
   
 
   def navbar
@@ -27,15 +27,11 @@ module ApplicationHelper
   end
 
   def sign_up_in_or_update user, action 
-    form_with(model: user, class: "register-form", url:(login_path if action == 'Sign in')) do |form| 
+    form_with(model: user, builder: UserFormBuilder, class: "register-form", url:(login_path if action == 'Sign in')) do |form| 
       if action == 'Sign in'
-        labeled_field(form, user, 'email', "zmdi zmdi-email", "Your Email") +
-        labeled_field(form, user, 'password', "zmdi zmdi-lock", "Your Password") 
+        form.sign_in_fields 
       else
-        labeled_field(form, user, 'name', "zmdi zmdi-account material-icons-name", "Your Name") + 
-        labeled_field(form, user, 'email', "zmdi zmdi-email", "Your Email") +
-        labeled_field(form, user, 'password', "zmdi zmdi-lock", "Your Password") +
-        labeled_field(form, user, 'password_cofirmation', "zmdi zmdi-lock-outline", "Confirm Password")
+        form.sign_in_or_update_fields
       end <<
       tag.div(class:"form-group form-button") do 
         form.submit(id: "signup", class: "form-submit", value: action) 
