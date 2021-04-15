@@ -21,7 +21,7 @@
     <%= tag.h4 @item.title, class:"card-text " %>
   </div>
   <ul class="list-group list-group-flush" style="list-style-type:none;">
-    <li class="list-group-item"> <%= status_based_display @item  %> </li>
+    <li class="list-group-item"> <%= @item.status_based_display   %> </li>
   </ul>
 </div>
 <%= tag.hr %>
