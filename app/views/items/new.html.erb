@@ -19,11 +19,11 @@
         <%= f.label :end_time %>
         <%= f.datetime_field :end_time %><%= @item.errors&.[](:end_time)[0] %><br>
         <%= f.label :starting_price %>
-        $<%= f.number_field :starting_price %><%= @item.errors&.[](:starting_price)[0] %> <br>
+        $<%= f.number_field :starting_price, min: 0 %><%= @item.errors&.[](:starting_price)[0] %> <br>
         <%= f.label :minumum_price %>
-        $<%= f.number_field :minimum_price %><%= @item.errors&.[](:minimum_price)[0] %><br>
+        $<%= f.number_field :minimum_price, min: 0 %><%= @item.errors&.[](:minimum_price)[0] %><br>
         <%= f.label :shipping %>
-        $<%= f.number_field :shipping %><%= @item.errors&.[](:shipping)[0] %> <br>
+        $<%= f.number_field :shipping, min: 0 %><%= @item.errors&.[](:shipping)[0] %> <br>
         <hr>
         <h5>Upload some images for your item:</h5>
         <br>

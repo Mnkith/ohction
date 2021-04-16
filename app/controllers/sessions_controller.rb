@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
     @user = User.new
   end
 
-  
   def create
     user = User.find_by(email: params[:user][:email].downcase)
     if user && user.authenticate(params[:user][:password])
@@ -23,8 +22,8 @@ class SessionsController < ApplicationController
   end
 
   def fb_login
-    # @user = User.find_or_create_by(uid: auth['uid']) do |u| #why not use email as id to avoid duplicates and email uniqness clash
-    @user = User.find_or_create_by(email: auth['info']['email']) do |u|
+    @user = User.find_or_create_by(uid: auth['uid']) do |u| #why not use email as id to avoid duplicates and email uniqness clash
+    # @user = User.find_or_create_by(email: auth['info']['email']) do |u|
       # binding.pry
       u.name = auth['info']['name']
       u.email = auth['info']['email']
@@ -35,10 +34,6 @@ class SessionsController < ApplicationController
     redirect_to @user
   end
 
-  def show
-  end
-
-  
   def destroy
     log_out
     redirect_to root_url

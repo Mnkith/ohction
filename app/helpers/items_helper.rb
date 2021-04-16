@@ -1,6 +1,10 @@
-module ItemsHelper
+module ItemsHelper 
   module InstanceHelper
     include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::FormHelper
+    include ActionView::Context
+    # include ActionController
+    include Rails.application.routes.url_helpers
 
     
     
@@ -28,11 +32,11 @@ module ItemsHelper
       self.save
     end
 
-    def owner? current_user
+    def owned_by? current_user
       # binding.pry
-      seller_id == current_user.id
+      seller == current_user
     end
-    
+
     def display_as_sold 
       tag.li('This item is sold', class: 'list-group-item' ) <<
       tag.li("Auction ended at: #{end_time}") << 
@@ -40,37 +44,53 @@ module ItemsHelper
       tag.li("Item sold for: #{current_price + starting_price}") 
     end
 
+    def display_as_owned
+      tag.li 'Your the owner of this item', class: 'list-group-item'
+      item.active? ? tag.li("Can't Edit an item under active auction", class: 'list-group-item') : tag.li(tag.a("Edit this item", href: edit_item_path(item)), class: 'list-group-item')
+    end
+
+    def display_as_active
+      tag.li("Auction started at: #{start_time}", class: 'list-group-item')  <<
+      tag.li("Auction will end at: #{end_time}", class: 'list-group-item')  <<
+      tag.li("Starting price: $#{starting_price}", class: 'list-group-item') <<
+      tag.li("Shipping: $#{shipping}", class: 'list-group-item') <<
+      tag.li("Current price: $#{starting_price + current_price}", class: 'list-group-item') 
+      # form_with(model: Bid.new, url: item_bids_path(@item), controller: :bid, action: :create) do |f|
+      #   # f.hidden_field(:item_id, value: self.id) <<
+      #   f.number_field( :amount ) <<
+      #   f.submit('Place your bid')
+      # end
+    end
+
     def status_based_display 
       if sold?
-        # binding.pry
-        display_as_sold #self
-       
-      elsif item.owner? current_user
-        tag.li 'Your the owner of this item', class: 'list-group-item'
-        item.active? ? tag.li("Can't Edit an item under active auction", class: 'list-group-item') : tag.li(tag.a("Edit this item", href: edit_item_path(item)), class: 'list-group-item')
-      elsif item.active?
-        tag.li("Auction started at: #{item.start_time}", class: 'list-group-item')  <<
-        tag.li("Auction will end at: #{item.end_time}", class: 'list-group-item')  <<
-        tag.li("Starting price: $#{item.starting_price}", class: 'list-group-item') <<
-        tag.li("Shipping: $#{item.shipping}", class: 'list-group-item') <<
-        tag.li("Current price: $#{item.starting_price + item.current_price}", class: 'list-group-item') <<
-        form_with(model: Bid.new) do |f|
-          f.hidden_field(:item_id, value: item.id) <<
-          f.number_field( :amount ) <<
-          f.submit('Place your bid')
-        end
+        display_as_sold
+      elsif active?
+        display_as_active
       else
-        tag.li("Auction will start at: #{item.start_time}", class: 'list-group-item')  <<
-        tag.li("Auction will end at: #{item.end_time}", class: 'list-group-item')  <<
-        tag.li("Starting price: $#{item.starting_price}", class: 'list-group-item') <<
-        tag.li("Shipping: $#{item.shipping}", class: 'list-group-item')
+        tag.li("Auction will start at: #{start_time}", class: 'list-group-item')  <<
+        tag.li("Auction will end at: #{end_time}", class: 'list-group-item')  <<
+        tag.li("Starting price: $#{starting_price}", class: 'list-group-item') <<
+        tag.li("Shipping: $#{shipping}", class: 'list-group-item')
   
         
       end
     
     end
 
-    
+    # def display_as_active item
+    #   tag.li("Auction started at: #{item.start_time}", class: 'list-group-item')  <<
+    #   tag.li("Auction will end at: #{item.end_time}", class: 'list-group-item')  <<
+    #   tag.li("Starting price: $#{item.starting_price}", class: 'list-group-item') <<
+    #   tag.li("Shipping: $#{item.shipping}", class: 'list-group-item') <<
+    #   tag.li("Current price: $#{item.starting_price + item.current_price}", class: 'list-group-item') <<
+    #   # form_tag("/items/#{item.id}/bids") do
+    #   #   hidden_field_tag name:"authenticity_token", value:"#{form_authenticity_token}">
+    #   #   # f.hidden_field(:item_id, value: self.id) <<
+    #   #   number_field_tag( :amount ) <<
+    #   #   submit_tag('Place your bid')
+    #   # end
+    # end
 
     
     
@@ -86,10 +106,14 @@ module ItemsHelper
 
   module ClassHelper
     include ActionView::Helpers::TagHelper
+    include ActionView::Helpers::FormHelper
+    include Rails.application.routes.url_helpers
 
     def dezone(time)
       time.strftime('%Y-%m-%d %H:%M:%S')
     end
+
+    
 
     
     def diplay_all_items

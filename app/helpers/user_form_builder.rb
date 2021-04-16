@@ -18,13 +18,4 @@ class UserFormBuilder < ActionView::Helpers::FormBuilder
     self.sign_in_fields +
     self.labeled_field(:password_cofirmation, class:"zmdi zmdi-lock-outline", placeholder:"Confirm Password")
   end
-
-
-  # def div_radio_button(method, tag_value, options = {})
-  #   @template.content_tag(:div,
-  #     @template.radio_button(
-  #       @object_name, method, tag_value, objectify_options(options)
-  #     )
-  #   )
-  # end
 end
