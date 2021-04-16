@@ -9,15 +9,15 @@ Rails.application.routes.draw do
   # post '/signup', to: 'users#new'
   # get 'account', to: 'users#show'
   resources :users do
-    resources :items, only: [:index, :new]
+    resources :items, only: [:index, :new, :edit]
   end
 
-  resources :items do
+  resources :items, only: [:show, :update, :destroy, :create, :new] do
     resources :bids, only: [:create]
   end
 
   # get '/items/new', to: 'items#new'
-  resources :items, only: [:show, :edit, :update, :destroy, :create, :new]
+  # resources :items, only: [:show, :update, :destroy, :create, :new]
   resources :users, :bids
 
   # get "/fonts/poppins/:font", to: "sessions#fonts"

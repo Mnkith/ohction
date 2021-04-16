@@ -18,8 +18,6 @@ class Item < ApplicationRecord
   validate :start_time_must_be_in_futur, on: :create
   validate :end_time_later_than_start_time, on: :create
 
-  
-
   def start_time_must_be_in_futur
     if start_time && (Item.dezone(start_time) < Item.dezone(Time.now))
       errors.add(:start_time,

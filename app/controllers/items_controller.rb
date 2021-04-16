@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
+
   # include ItemsHelper::InstanceHelper
   before_action :logged_in_user, except: [:home]
+  before_action :verify_owner, only: [:edit]
   layout 'item_layout', only: [:show]
   # layout false
   def index 
@@ -26,9 +28,12 @@ class ItemsController < ApplicationController
   end
 
   def edit 
+    # binding.pry
+    @item = Item.find_by id: params[:id]
   end
 
   def update
+
   end
 
   def create 
@@ -59,6 +64,10 @@ class ItemsController < ApplicationController
    
   def item_params
     params.require(:item).permit(:title, :seller_id, :start_time, :end_time, :starting_price, :minimum_price, bulletings_attributes:{})
+  end
+
+  def verify_owner 
+    render file: "#{Rails.root}/public/404.html", layout: false unless Item.find_by(id: params[:id]).seller == current_user
   end
 
   def images_params
