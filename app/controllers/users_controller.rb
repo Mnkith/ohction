@@ -56,3 +56,5 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password)
   end
 end
+
+# thin start --ssl --ssl-key-file=host.key --ssl-cert-file=host.cert

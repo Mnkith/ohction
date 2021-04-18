@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_09_185300) do
+ActiveRecord::Schema.define(version: 2021_04_17_033600) do
 
   create_table "bids", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 2021_04_09_185300) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "buyer_id"
     t.integer "seller_id"
+    t.string "status", default: "pending"
     t.index ["buyer_id"], name: "index_items_on_buyer_id"
     t.index ["seller_id"], name: "index_items_on_seller_id"
   end

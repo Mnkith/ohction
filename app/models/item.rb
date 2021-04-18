@@ -10,13 +10,18 @@ class Item < ApplicationRecord
   has_many :images, through: :item_details
   has_many :bulletings, through: :item_details
 
-  accepts_nested_attributes_for :images, reject_if: proc {|attributes| attributes[:path].blank?}
-  accepts_nested_attributes_for :bulletings, reject_if: proc {|attributes| attributes[:bulleting].blank?}
+  accepts_nested_attributes_for :images, reject_if: proc {|attributes| attributes[:path].blank?}, allow_destroy: true
+  accepts_nested_attributes_for :bulletings, reject_if: proc {|attributes| attributes[:bulleting].blank?}, allow_destroy: true
   accepts_nested_attributes_for :bids
 
   validates :start_time, presence: true
+  validates :status, inclusion: { in: %w(pending active sold failed), message: "%{attribute} is not a valid status" }
   validate :start_time_must_be_in_futur, on: :create
   validate :end_time_later_than_start_time, on: :create
+
+  scope :filter_by_status, -> (status) { where status: status }
+
+  # scope :active(status), -> { where(active?: true) }
 
   def start_time_must_be_in_futur
     if start_time && (Item.dezone(start_time) < Item.dezone(Time.now))
@@ -25,36 +30,37 @@ class Item < ApplicationRecord
     end
   end
 
+  # def status 
+  #   update_status
+  # end
+
+
   def end_time_later_than_start_time
     errors.add(:end_time, 'must be ahead of start time!') if start_time && end_time && (start_time > end_time)
   end
-  
-  # validates :title, presence: true
-  # validates :starting_price, presence: true, numericality: { only_integer: true }
-  # validates :duration, presence: true
-  # validates :shipping, presence: true
 
-  # def upload_images(item, paths)
-  #   paths.each do |_, _v|
-  #     uploaded_file = [:path]
-  #     File.open(Rails.root.join('app', 'assets', 'images', uploaded_file.original_filename), 'wb') do |file|
-  #       file.write(uploaded_file.read)
-  #     end
-  #     item.images << Image.create(path: uploaded_file.original_filename)
-  #   end
-  # end
+  def instanciate_nested_attributes
+    5.times do 
+      self.images << Image.new
+      self.bulletings << Bulleting.new
+    end 
+  end
 
-  # def self.dezone time
-  #   time.strftime('%Y-%m-%d %H:%M:%S')
-  # end
+  def set_sold
+    self.images.clear
+    self.images << Image.find_or_create_by(path: 'sold.jpg')
+    self.buyer_id = Bid.last.user_id
+    # self.save
+  end
 
-  # def status_based_display current_user
-  #   if owner? current_user
-  #     content_tag :li, 'You own this item', class:"list-group-item"
-  #   end
-
-  # end
-  
-  
-
+  def update_status
+    if active?
+      self.update status: 'active'
+    elsif sold?
+      set_sold
+      self.update status: 'sold'
+    elsif failed?
+      self.update status: 'failed'
+    end
+  end
 end

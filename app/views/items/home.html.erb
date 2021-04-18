@@ -1,16 +1,15 @@
-<div class="container col-9 ">
+<div class="container col-10 ">
   <br>
-   <div class="row  ">
-    <%# <div class="col-sm-4 ">  %>
-      <div class="card-columns">  
+   <div class="row ">
+      <div class="card-columns",  >  
         <% @items.each do |item| %>
           <% unless item.owned_by? current_user%>
-          <div class="card d-inline-block card-columns col-sm-3" style="width: 18rem;">
+          <div class="card d-inline-block card-columns col-sm-3" style="width: 18rem;hight: 45rem;">
             <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <% item.images.each do |image| %>
-                  <div class="carousel-item <%= "active" if image == item.images.first %> ">
-                    <%= image_tag image.path, class:"d-block w-30 img-fluid", style: "height: 200px"%>
+                  <div class="carousel-item  <%= "active" if image == item.images.first %> " >
+                    <%= image_tag image.path || '/no_image.jpg', class:"d-block w-30 img-fluid", style:'height: 250px;width: 300px;object-fit: fill;'%>
                   </div>
                 <% end %>
               </div>
@@ -20,21 +19,18 @@
               <p class="card-text "><%= item.title%></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Sold by: <%= item.seller.name %> </li>
-              <li class="list-group-item">Added at:<%= item.created_at %> </li>
-              <li class="list-group-item">Starts at:<%= item.start_time %> </li>
-              <li class="list-group-item">Starting price: $<%= item.starting_price %> </li>
-              <li class="list-group-item">Shipping: $<%= item.shipping %> </li>
+              <%  %>
+              <%= item.status_based_display %>
             </ul>
             <div class="card-body">
               <%=link_to "view item", item_path(item), class: "card-link" %>
-              <a href="#" class="card-link">Another link</a>
+              <%# <a href="#" class="card-link">Another link</a> %>
             </div>
 
           </div>
           <% end %>
         <% end %>
-      <%# <%# </div> %>
     </div>
   </div> 
 </div>
+

@@ -32,15 +32,16 @@
           <th scope="col">Starting price</th>
           <th scope="col">Minimum price</th>
           <th scope="col">Starts on</th>
+          <th scope="col">Edit item</th>
         </tr>
       </thead>
       <tbody>
         <%= render partial: 'users/sale', collection: current_user.sales %>
       </tbody>
     </table>
-    <%= link_to 'Add more items', new_item_path %>
+    <%= link_to 'Add more items', new_user_item_path(current_user) %>
   <% else %>
     <h5>You don't have any listed items yet</h5>
-    <%= link_to 'Add items', new_item_path %>
+    <%= link_to 'Add items', new_user_item_path(current_user) %>
   <% end %>
 </div>

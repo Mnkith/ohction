@@ -8,9 +8,9 @@
     <strong>Email:</strong>
     <%= @current_user.email %>
   </p>
-  <%= link_to "Delete Acoount", user_path(@current_user), method: "DELETE", confirm: "Are you sure?", disable_with: "Processing..." %>
   <%= link_to 'Back', '/' %> |
   <%= link_to 'Edit', ['edit', @current_user] %>  <hr>
   Create new item <%= link_to 'here', new_user_item_path(@current_user) %> or <br>
-  Manage your existing items  <%= link_to 'here', user_items_path(@current_user) %>
+  Manage your existing items  <%= link_to 'here', user_items_path(@current_user) %><hr>
+  <%= link_to "Delete Acoount", user_path(@current_user), method: "DELETE", confirm: "Are you sure?", disable_with: "Processing..." %>
 </div>

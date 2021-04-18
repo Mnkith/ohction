@@ -50,3 +50,6 @@ class SessionsController < ApplicationController
   end
   
 end
+
+# thin start --ssl --ssl-key-file=host.key --ssl-cert-file=host.cert
+
