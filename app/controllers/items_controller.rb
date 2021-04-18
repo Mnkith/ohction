@@ -1,20 +1,18 @@
 class ItemsController < ApplicationController
   before_action :logged_in_user, except: [:home]
-  before_action :verify_owner, only: [:edit]
-  # before_action :update_status, only: %i[show home index]
+  before_action :verify_owner, only: [:edit, :destroy]
   layout 'item_layout', only: [:show]
-  # layout false
+
   def index
-    # @user = User.find_by(params[:id])
     @purchases = current_user.purchases
   end
 
   def home
-    # binding.pry
-    if !params[:status].empty?
+    if params[:status] && !params[:status].empty?
       @items = Item.filter_by_status(params[:status])
     else
       @items  = Item.all
+      # binding.pry
     end
   end
 
@@ -24,32 +22,41 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find params[:id]
+    @item = Item.find_by id: params[:id]
+    # binding.pry
   end
 
   def edit
-    # binding.pry
     @item = Item.find_by id: params[:id]
-    # @item.instanciate_nested_attributes
   end
 
-  def update; end
+  def update
+    @item = Item.find_by id: params[:id]
+    if @item.update item_params
+      redirect_to user_items_path(current_user), notice: 'Item was updated successfully.'
+    else
+      render :edit
+    end
+  end
 
   def create
     @item = Item.new item_params
-
-    # binding.pry
-
     if @item.valid?
       images = images_params['images_attributes']
       upload_images @item, images
       @item.save
-      redirect_to @item, notice: 'Your item was added successfully.'
+      redirect_to user_items_path(current_user), notice: 'Your item was added successfully.'
     else
       @item.instanciate_nested_attributes
-      render :new # , location: new_user_item_path(current_user)
+      render :new 
     end
   end
+
+  def destroy 
+    binding.pry
+  end
+
+
 
   private
 
@@ -59,7 +66,6 @@ class ItemsController < ApplicationController
   end
 
   def verify_owner
-    # render html: helpers.tag.strong('Not Found')
     unless Item.find_by(id: params[:id]).seller == current_user
       render file: "#{Rails.root}/public/404.html",
              layout: false
@@ -80,10 +86,11 @@ class ItemsController < ApplicationController
         item.images << Image.create(path: uploaded_file.original_filename)
       end
     else
-
       item.images << Image.find_or_create_by(path: 'no_image.jpg')
     end
   end
+
+  
 
   
 end

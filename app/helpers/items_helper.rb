@@ -29,6 +29,10 @@ module ItemsHelper
       started? && !ended?
     end
 
+    def pending?
+      !started?
+    end
+
     # def set_status
     #   if active?
     #     status = 'active'
@@ -116,14 +120,6 @@ module ItemsHelper
     end
   end
 
-  
-
-
-
-  
-
-  
-
   module ClassHelper
     # include ActionView::Helpers::TagHelper
     # include ActionView::Helpers::FormHelper
@@ -132,18 +128,5 @@ module ItemsHelper
     def dezone(time)
       time.strftime('%Y-%m-%d %H:%M:%S')
     end
-    # def diplay_all_items
-    #   Item.all.map do |item|
-    #     tag.div id: 'carouselExampleSlidesOnly', class: 'carousel slide' do
-    #       tag.div class: 'carousel-inner' do
-    #         tag.div class: 'carousel-item active p-1 border bg-dark' do
-    #           item.images.each do |image|
-    #             image_tag image.path, class: 'd-block w-30 img-fluid'
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-    # end
   end
 end

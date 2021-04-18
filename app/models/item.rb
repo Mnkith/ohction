@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   accepts_nested_attributes_for :bulletings, reject_if: proc {|attributes| attributes[:bulleting].blank?}, allow_destroy: true
   accepts_nested_attributes_for :bids
 
-  validates :start_time, presence: true
+  validates_presence_of :title, :start_time, :end_time
   validates :status, inclusion: { in: %w(pending active sold failed), message: "%{attribute} is not a valid status" }
   validate :start_time_must_be_in_futur, on: :create
   validate :end_time_later_than_start_time, on: :create

@@ -1,8 +1,8 @@
 <tr>
-  <%# <th scope="row">1</th> %>
   <td><%= sale.title %></td>
   <td>$<%= sale.starting_price %></td> 
   <td>$<%= sale.minimum_price %></td>
   <td><%= sale.start_time %></td>
-  <td><%= link_to_if !sale.active? && !sale.sold?, 'Edit', edit_user_item_path(current_user, sale)  %></td>
+  <td><%= sale.status.capitalize %></td>
+  <td><%= link_to_if sale.pending?, 'Edit', edit_user_item_path(current_user, sale)  %></td>
 </tr>

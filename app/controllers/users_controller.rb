@@ -33,22 +33,19 @@ class UsersController < ApplicationController
 
   
   def update
-
     if @current_user.update user_params
       redirect_to current_user, notice: 'Your acount was updated successfully'
     else
-      
-      # binding.pry
-      # @user = 
       render :edit, layout: 'sessions_layout'
-      # redirect_to edit_user_path(@current_user)
     end
-    
   end
 
   
   def destroy
-    render '/items/home'
+    # binding.pry
+    log_out
+    User.find(params[:id]).destroy
+    redirect_to :root
   end
 
   private

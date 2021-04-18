@@ -12,5 +12,6 @@
   <%= link_to 'Edit', ['edit', @current_user] %>  <hr>
   Create new item <%= link_to 'here', new_user_item_path(@current_user) %> or <br>
   Manage your existing items  <%= link_to 'here', user_items_path(@current_user) %><hr>
-  <%= link_to "Delete Acoount", user_path(@current_user), method: "DELETE", confirm: "Are you sure?", disable_with: "Processing..." %>
-</div>
+  <%= button_to "Delete Youre Account", @current_user, method: :delete, controller: :users,
+                                  data: { confirm: "You sure?" }, class:"btn btn-link" %>
+  </div>
