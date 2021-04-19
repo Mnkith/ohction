@@ -8,8 +8,11 @@ module ApplicationHelper
             content_tag(:a, 'My Account', href: user_path(current_user), class: ' btn btn-outline-success my-2 my-sm-0',
                                           style: 'display: inline-flex;')
           end <<
-          tag.a((current_user ? 'Log Out' : 'Login/Sign Up'), href: (current_user ? logout_path : login_path),
-                                                              class: 'btn btn-outline-success  float-right')
+          # tag.a((current_user ? 'Log Out' : 'Login/Sign Up'), href: (current_user ? logout_path : login_path),
+          #                                                     class: 'btn btn-outline-success  float-right')
+        link_to_if(current_user, 'Log out', logout_path, class: 'btn btn-outline-success  float-right') do
+          link_to('Login/Sign Up', login_path, class: 'btn btn-outline-success  float-right')
+        end
       end
     end
   end

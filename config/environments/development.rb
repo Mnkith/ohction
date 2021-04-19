@@ -11,14 +11,10 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
-  # Git rid of field_with_error red wrapper//added by me//
+  # Get rid of field_with_error red wrapper//added by me//
   ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
     html_tag.html_safe
   end
-
-  # ActionView::Base.field_error_proc = proc do |html_tag, instance|
-  #   html_tag.gsub("form-control", "form-control is-invalid").html_safe
-  # end
 
   # Show full error reports.
   config.consider_all_requests_local = true
