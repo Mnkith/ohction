@@ -8,11 +8,11 @@
     <%= f.label :end_time %>
     <%= f.datetime_field :end_time %> <%= tag.small @item.errors&.[](:end_time)[0], class:"text-danger" %><br>
     <%= f.label :starting_price %>
-    $<%= f.number_field :starting_price, min: 0 %> <%= tag.small @item.errors&.[](:starting_price)[0], class:"text-danger" %> <br>
+    $<%= f.number_field :starting_price, min: 0, step: 0.1 %> <%= tag.small @item.errors&.[](:starting_price)[0], class:"text-danger" %> <br>
     <%= f.label :minumum_price %>
-    $<%= f.number_field :minimum_price, min: 0 %> <%= tag.small @item.errors&.[](:minimum_price)[0], class:"text-danger" %><br>
+    $<%= f.number_field :minimum_price, min: 0, step: 0.1 %> <%= tag.small @item.errors&.[](:minimum_price)[0], class:"text-danger" %><br>
     <%= f.label :shipping %>
-    $<%= f.number_field :shipping, min: 0 %> <%= tag.small @item.errors&.[](:shipping)[0], class:"text-danger" %> <br>
+    $<%= f.number_field :shipping, min: 0, step: 0.1 %> <%= tag.small @item.errors&.[](:shipping)[0], class:"text-danger" %> <br>
     <hr>
     <h5>Upload some images for your item:</h5>
     <br>

@@ -3,10 +3,10 @@ class Item < ApplicationRecord
   include ItemsHelper::InstanceHelper
   belongs_to :buyer, class_name: 'User', foreign_key: 'buyer_id', optional: true # buyer_id won't be set
   belongs_to :seller, class_name: 'User', foreign_key: 'seller_id'               # until someone buyes the item
-  # hence optional: true
+                                                                                 # hence optional: true
   has_many :bids
   has_many :users, through: :bids
-  has_many :item_details
+  has_many :item_details, dependent: :destroy
   has_many :images, through: :item_details
   has_many :bulletings, through: :item_details
 
@@ -21,19 +21,12 @@ class Item < ApplicationRecord
 
   scope :filter_by_status, -> (status) { where status: status }
 
-  # scope :active(status), -> { where(active?: true) }
-
   def start_time_must_be_in_futur
     if start_time && (Item.dezone(start_time) < Item.dezone(Time.now))
       errors.add(:start_time,
                  'must be in the future!')
     end
   end
-
-  # def status 
-  #   update_status
-  # end
-
 
   def end_time_later_than_start_time
     errors.add(:end_time, 'must be ahead of start time!') if start_time && end_time && (start_time > end_time)
@@ -50,7 +43,6 @@ class Item < ApplicationRecord
     self.images.clear
     self.images << Image.find_or_create_by(path: 'sold.jpg')
     self.buyer_id = Bid.last.user_id
-    # self.save
   end
 
   def update_status

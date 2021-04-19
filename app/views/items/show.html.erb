@@ -23,20 +23,15 @@
   <ul class="list-group list-group-flush" style="list-style-type:none;">
     <li class="list-group-item"> <%= @item.status_based_display   %> </li>
   </ul>
-  
   <% if @item.active? %>
-  <%= form_with model: Bid.new, url: item_bids_path(@item) do |f| %>
-        <%# <input type='number' name='amount'> %>
-        <%= f.number_field :amount, min: 0 %>
-        <div><small id='alert' style='color: red'><%= alert %></small></div>
-        <%= f.submit('Place your bid') %> 
-        <%# <input type='submit'> %>
-      <% end %>
-      <% end %> 
-      
+    <%= form_with model: Bid.new, url: item_bids_path(@item) do |f| %>
+      <%= f.number_field :amount, min: 0 %>
+      <div><small id='alert' style='color: red'><%= alert %></small></div>
+      <%= f.submit('Place your bid') %>
+    <% end %>
+  <% end %>
 </div>
 <%= tag.hr %>
-      
 <%= tag.hr %>
 <%= tag.h2 'Item detail:' %>
 <ul class="list-group">

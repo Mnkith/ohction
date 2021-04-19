@@ -1,17 +1,5 @@
 module ApplicationHelper
-  # include ItemsHelper::InstanceHelper
-  # extend ItemsHelper::ClassHelper
-
-
-  # def labeled_field form_builder, user, attrbt, classes, ph
-  #   tag.div(class: "form-group") do 
-  #     # binding.pry
-  #     form_builder.label(attrbt, '.', class: classes) <<
-  #     form_builder.text_field(attrbt, id: attrbt, placeholder: ph) << user.field_error(attrbt)
-  #   end
-  # end
   
-
   def navbar
     tag.nav(class: 'navbar navbar-expand-lg navbar-light bg-light sticky-top') do
       tag.div(class: 'collapse navbar-collapse', id: 'collapsibleNavId') do

@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_04_17_033600) do
 
   create_table "bids", force: :cascade do |t|
-    t.integer "amount", default: 0
+    t.float "amount", default: 0.0
     t.integer "user_id"
     t.integer "item_id"
     t.datetime "created_at", precision: 6, null: false
@@ -41,12 +41,12 @@ ActiveRecord::Schema.define(version: 2021_04_17_033600) do
 
   create_table "items", force: :cascade do |t|
     t.string "title"
-    t.integer "starting_price", default: 0
-    t.integer "minimum_price", default: 0
-    t.integer "current_price", default: 0
+    t.float "starting_price", default: 0.0
+    t.float "minimum_price", default: 0.0
+    t.float "current_price", default: 0.0
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer "shipping", default: 0
+    t.float "shipping", default: 0.0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "buyer_id"
