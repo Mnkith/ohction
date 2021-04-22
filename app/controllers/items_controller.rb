@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
   before_action :logged_in_user, except: [:home]
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :all_items, only: [:home, :destroy]
   before_action :verify_owner, only: [:edit, :destroy]
   layout 'item_layout', only: [:show]
 
@@ -10,9 +12,6 @@ class ItemsController < ApplicationController
   def home
     if params[:status] && !params[:status].empty?
       @items = Item.filter_by_status(params[:status])
-    else
-      @items  = Item.all
-      # binding.pry
     end
   end
 
@@ -22,16 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find_by id: params[:id]
-    # binding.pry
   end
 
   def edit
-    @item = Item.find_by id: params[:id]
   end
 
   def update
-    @item = Item.find_by id: params[:id]
     if @item.update item_params
       redirect_to user_items_path(current_user), notice: 'Item was updated successfully.'
     else
@@ -53,12 +48,21 @@ class ItemsController < ApplicationController
   end
 
   def destroy 
-    binding.pry
+    @item.destroy
+    render :home
   end
 
 
 
   private
+
+  def find_item
+    @item = Item.find_by id: params[:id]
+  end
+
+  def all_items
+    @items  = Item.all
+  end
 
   def item_params
     params.require(:item).permit(:title, :seller_id, :start_time, :end_time, :starting_price, :minimum_price, :status,
@@ -89,8 +93,4 @@ class ItemsController < ApplicationController
       item.images << Image.find_or_create_by(path: 'no_image.jpg')
     end
   end
-
-  
-
-  
 end
