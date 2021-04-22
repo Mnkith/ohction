@@ -7,8 +7,6 @@ class UsersController < ApplicationController
 
   
   def show
-    # binding.pry
-    # @user = current_user
   end
 
   
@@ -18,7 +16,6 @@ class UsersController < ApplicationController
 
   
   def edit
-    # @user = current_user
   end
 
   def create
@@ -43,14 +40,14 @@ class UsersController < ApplicationController
   
   def destroy
     # binding.pry
+    @current_user.destroy
     log_out
-    User.find(params[:id]).destroy
     redirect_to :root
   end
 
   private
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
 
