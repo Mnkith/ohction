@@ -25,7 +25,7 @@
   </ul>
   <% if @item.active? %>
     <%= form_with model: Bid.new, url: item_bids_path(@item) do |f| %>
-      <%= f.number_field :amount, min: 0 %>
+      <%= f.number_field :amount, min: 0, step: 0.5 %>
       <div><small id='alert' style='color: red'><%= alert %></small></div>
       <%= f.submit('Place your bid') %>
     <% end %>
