@@ -3,7 +3,6 @@ class UserFormBuilder < ActionView::Helpers::FormBuilder
     @template.tag.div(class: "form-group") do 
       @template.label(object_name, method,'.', objectify_options(options)) <<
       @template.text_field(object_name, method, objectify_options(options))  <<
-      # binding.pry
       @template.tag.span(object.field_error(method), style: 'display: inline-block;color:red')
     end
   end
