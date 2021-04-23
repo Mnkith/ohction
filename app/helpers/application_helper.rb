@@ -39,10 +39,8 @@ module ApplicationHelper
   end
 
   def action_link action 
-    if action == 'Sign up'
-      tag.a 'I am already member', href:login_path, class:"signin-image-link"
-    elsif action == 'Sign in'
-      tag.a 'Create an account', href:new_user_path, class:"signup-image-link"
+    link_to_if(action == 'Sign up', 'I am already member', login_path, class:"signin-image-link") do
+      link_to 'Create an account', new_user_path, class:"signup-image-link"
     end
   end
 end
