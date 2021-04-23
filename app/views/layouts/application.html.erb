@@ -5,20 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <%# <meta name="viewport" content="width=device-width,initial-scale=1"> %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%# <div style="background-image: url('/assets/background.jpg');"> %>
-    <%# <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= stylesheet_link_tag '/assets/fonts/material-icon/css/material-design-iconic-font.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%# <%= stylesheet_link_tag 'items' %>
-    <!-- Main css -->
-    <%# <link rel="stylesheet" href="css/style.css"> %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <%# <link href="/assets/stylesheets/bootstrap.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> %>
-    <%# <link rel="stylesheet" href="/assets/fonts/material-icon/css/material-design-iconic-font.min.css"> %>
-  </head>
+    </head>
   <body >
     <%= navbar%>
     <%= render 'layouts/filter_form' if @items %>

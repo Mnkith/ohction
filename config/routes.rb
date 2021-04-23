@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'items#home'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  get '/logout', to: 'sessions#destroy'
+  delete '/logout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
   # get '/auth/:provider/callback', to: 'sessions#fb_login' 
   get '/auth/facebook/callback', to: 'sessions#fb_login' 

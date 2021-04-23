@@ -49,10 +49,8 @@ class ItemsController < ApplicationController
 
   def destroy 
     @item.destroy
-    render :home
+    redirect_to user_items_path(current_user)
   end
-
-
 
   private
 
